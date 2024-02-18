@@ -1,0 +1,55 @@
+body{
+    background-image: url('https://st3.depositphotos.com/15225220/18932/v/600/depositphotos_189328220-stock-illustration-perfect-starry-night-sky-background.jpg');
+    background-size: cover;
+}
+.logo{
+    width: 100px;
+    height: 50px;
+}
+.img2{
+    width: 300px;
+    height: 400px;
+    
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.people{
+    font-style: oblique;
+    border-color: darkgoldenrod;
+    border-width: 2px;
+    background-color:lightgray;
+    flex: 1 0 200px;
+    box-sizing: border-box;
+    margin: 10px;
+
+}
+.vehicles{
+    font-style: oblique;
+    border-color: darkgoldenrod;
+    border-width: 2px;
+    background-color:lightgray;
+    flex: 1 0 200px;
+    box-sizing: border-box;
+    margin: 10px;
+}
+
+.planets{
+    font-style: oblique;
+    border-color:darkgoldenrod;
+    border-width: 2px;
+    background-color:lightgray;
+    flex: 1 0 200px;
+    box-sizing: border-box;
+    margin: 10px;
+}
+.cardBg{
+    background-color: rgba(255, 255, 255, 0);
+    color:white;
+}
+.text{
+    font-size: 30px;
+    font-style: italic;
+    color:darkgoldenrod
+}

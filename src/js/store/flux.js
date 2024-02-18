@@ -1,45 +1,77 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			people: {},
+			vehicles: {},
+			planets: {},
+			favorites:[]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getAllPeople: () => {
+				fetch("https://www.swapi.tech/api/people/", {
+					method: 'GET',
+					headers: {
+						'Content-type': 'application/json'
+					},
+				},
+				).then(data => data.json())
+					.then(data => setStore({ people: data }))
+					.catch(err => console.error(err))
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			getCharacter: (uid) => {
+				fetch(`https://www.swapi.tech/api/people/${uid}`)
+					.then((response) => response.json())
+					.then((response) => { setStore({ character: response }) })
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			getAllVehicles: () => {
+				fetch("https://www.swapi.tech/api/vehicles/", {
+					method: 'GET',
+					headers: {
+						'Content-type': 'application/json'
+					},
+				},
+				
+				).then(data => data.json())
+					.then(data => setStore({ vehicles: data }))
+					.catch(err => console.error(err))
+			},
+			getVehicles: (uid) => {
+				fetch(`https://www.swapi.tech/api/vehicles/${uid}`)
+					.then((response) => response.json())
+					.then((response) => { setStore({ vehicles: response }) })
+			},
+			getAllPlanets: () => {
+				fetch("https://www.swapi.tech/api/planets/", {
+					method: 'GET',
+					headers: {
+						'Content-type': 'application/json'
+					},
+				},
+				).then(data => data.json())
+					.then(data => setStore({ planets: data }))
+					.catch(err => console.error(err))
+			},
+			getPlanets: (uid) => {
+				fetch(`https://www.swapi.tech/api/planets/${uid}`)
+					.then((response) => response.json())
+					.then((response) => { setStore({ planets: response }) })
+			},
+			addFavorites: (name) => {
+				setStore({ favorites: [...getStore().favorites, name] })
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
+			removeFavorite: (id) => {
+				setStore({
+					favorites: getStore().favorites.filter((item, i) => {
+						return i != id;
+					})
+				})
+			},
+
+
+		},
 	};
 };
 
-export default getState;
+export default getState
